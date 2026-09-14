@@ -28,8 +28,18 @@ The model is trained using gradient descent with min-max normalization for bette
 
 ## Installation
 
+### Option 1: Using a virtual environment (recommended)
+
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install matplotlib
+```
+
+### Option 2: System package
+
+```bash
+sudo apt install python3-matplotlib
 ```
 
 ## Usage
@@ -55,8 +65,8 @@ python predict.py
 
 Enter the mileage when prompted:
 ```
-Introduce el kilometraje del coche: 100000
-El precio estimado es: 6353.80
+Enter the car mileage: 100000
+The estimated price is: 6353.80
 ```
 
 A graph will display showing:
@@ -72,17 +82,26 @@ python score.py
 
 Output:
 ```
-=== Métricas de precisión del modelo ===
+=== Model accuracy metrics ===
 
-MSE  (Error Cuadrático Medio): 445727.42
-RMSE (Raíz del MSE): 667.59
-MAE  (Error Absoluto Medio): 523.41
-R²   (Coeficiente de determinación): 0.7823
+MSE  (Mean Squared Error): 445727.42
+RMSE (Root Mean Squared Error): 667.59
+MAE  (Mean Absolute Error): 523.41
+R²   (Coefficient of Determination): 0.7823
 
-Interpretación:
-- El modelo se equivoca en promedio 523€ por predicción
-- R² = 78.23% de la varianza del precio es explicada por el modelo
+Interpretation:
+- The model is off by an average of 523€ per prediction
+- R² = 78.23% of the price variance is explained by the model
 ```
+
+## Error Handling
+
+The programs include comprehensive error handling:
+
+- **File errors**: Clear messages if `data.csv` or `trained_data.json` are missing or inaccessible
+- **Data validation**: Invalid data (non-numeric, negative values) in CSV files is detected and reported with row numbers
+- **Input validation**: Negative or non-numeric mileage inputs are rejected with helpful error messages
+- **JSON validation**: Corrupted or malformed `trained_data.json` files are detected
 
 ## Algorithm
 
