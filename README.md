@@ -132,12 +132,25 @@ After training, parameters are denormalized to work with original values.
 
 ## Metrics
 
-The `score.py` program calculates:
+The `score.py` program calculates four key metrics to evaluate model performance:
 
-- **MSE** (Mean Squared Error): Average squared difference between predictions and actual values
-- **RMSE** (Root Mean Squared Error): Square root of MSE, in the same units as the target
-- **MAE** (Mean Absolute Error): Average absolute difference
-- **R²** (Coefficient of Determination): Proportion of variance explained by the model (0-1)
+### MSE (Mean Squared Error)
+Average of squared differences between predictions and actual values. By squaring errors, it penalizes large errors more heavily than small ones. Useful for detecting outliers, but hard to interpret because it's in squared units (€²). **Lower values = better model.**
+
+### RMSE (Root Mean Squared Error)
+Square root of MSE. It's in the same units as the target variable (€), making it more interpretable than MSE. Tells you how much predictions deviate on average. **Lower values = better model.**
+
+### MAE (Mean Absolute Error)
+Average of absolute errors (without squaring). Tells you how much the model is wrong per prediction, in euros. More robust to outliers than MSE/RMSE. **Lower values = better model.**
+
+### R² (Coefficient of Determination)
+Proportion of price variance explained by the model. Ranges from 0 to 1 (can be negative if model performs worse than predicting the mean). R²=1 means perfect prediction, R²=0 means the model explains nothing. For example, R²=0.78 means 78% of price variation is explained by mileage. **Higher values = better model.**
+
+### Interpretation Example
+If MAE=523 and R²=0.78:
+- The model is off by an average of 523€ per prediction
+- 78% of price variance is explained by mileage
+- The remaining 22% is due to other factors (age, condition, brand, etc.)
 
 ## Dataset
 

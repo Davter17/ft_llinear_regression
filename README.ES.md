@@ -132,12 +132,25 @@ Después del entrenamiento, los parámetros se desnormalizan para trabajar con v
 
 ## Métricas
 
-El programa `score.py` calcula:
+El programa `score.py` calcula cuatro métricas clave para evaluar el rendimiento del modelo:
 
-- **MSE** (Error Cuadrático Medio): Promedio de diferencias al cuadrado entre predicciones y valores reales
-- **RMSE** (Raíz del Error Cuadrático Medio): Raíz cuadrada del MSE, en las mismas unidades que el objetivo
-- **MAE** (Error Absoluto Medio): Promedio de diferencias absolutas
-- **R²** (Coeficiente de determinación): Proporción de varianza explicada por el modelo (0-1)
+### MSE (Error Cuadrático Medio)
+Promedio de las diferencias al cuadrado entre predicciones y valores reales. Al elevar al cuadrado los errores, penaliza más los errores grandes que los pequeños. Útil para detectar outliers, pero difícil de interpretar porque está en unidades cuadradas (€²). **Valores más bajos = mejor modelo.**
+
+### RMSE (Raíz del Error Cuadrático Medio)
+Raíz cuadrada del MSE. Está en las mismas unidades que la variable objetivo (€), por lo que es más interpretable que el MSE. Te dice cuánto se desvían las predicciones en promedio. **Valores más bajos = mejor modelo.**
+
+### MAE (Error Absoluto Medio)
+Promedio de los errores absolutos (sin elevar al cuadrado). Te dice cuánto se equivoca el modelo en promedio por predicción, en euros. Es más robusto a outliers que MSE/RMSE. **Valores más bajos = mejor modelo.**
+
+### R² (Coeficiente de Determinación)
+Proporción de la varianza del precio que explica el modelo. Va de 0 a 1 (puede ser negativo si el modelo funciona peor que predecir la media). R²=1 significa predicción perfecta, R²=0 significa que el modelo no explica nada. Por ejemplo, R²=0.78 significa que el 78% de la variación del precio se explica por el kilometraje. **Valores más altos = mejor modelo.**
+
+### Ejemplo de interpretación
+Si MAE=523 y R²=0.78:
+- El modelo se equivoca en promedio 523€ por predicción
+- El 78% de la variación del precio se explica por el kilometraje
+- El 22% restante se debe a otros factores (edad, estado, marca, etc.)
 
 ## Dataset
 
